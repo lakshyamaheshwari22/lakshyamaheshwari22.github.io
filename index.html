@@ -1,25 +1,451 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Lakshya Maheshwari</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lakshya Maheshwari</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+
+background:#0f172a;
+color:white;
+
+}
+
+.container{
+
+width:min(1100px,90%);
+margin:auto;
+
+}
+
+nav{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:30px 0;
+
+}
+
+.logo{
+
+font-size:26px;
+font-weight:700;
+
+}
+
+nav a{
+
+text-decoration:none;
+color:white;
+margin-left:25px;
+transition:.3s;
+
+}
+
+nav a:hover{
+
+color:#60a5fa;
+
+}
+
+.hero{
+
+padding:110px 0;
+
+}
+
+.hero h1{
+
+font-size:58px;
+margin-bottom:18px;
+
+}
+
+.hero h2{
+
+font-weight:400;
+color:#94a3b8;
+margin-bottom:35px;
+
+}
+
+.btn{
+
+display:inline-block;
+padding:14px 28px;
+background:#2563eb;
+border-radius:10px;
+text-decoration:none;
+color:white;
+font-weight:600;
+margin-right:15px;
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#1d4ed8;
+
+}
+
+.outline{
+
+background:transparent;
+border:2px solid #2563eb;
+
+}
+
+section{
+
+padding:90px 0;
+
+}
+
+.section-title{
+
+font-size:38px;
+margin-bottom:45px;
+
+}
+
+.about{
+
+font-size:18px;
+line-height:1.9;
+color:#cbd5e1;
+
+}
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+
+}
+
+.card{
+
+background:#172554;
+padding:30px;
+border-radius:20px;
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.card h3{
+
+font-size:28px;
+margin-bottom:15px;
+
+}
+
+.card p{
+
+line-height:1.8;
+color:#cbd5e1;
+
+}
+
+.skills{
+
+margin-top:20px;
+
+}
+
+.skill{
+
+display:inline-block;
+padding:8px 14px;
+margin:5px;
+background:#1e3a8a;
+border-radius:20px;
+font-size:14px;
+
+}
+
+.project-links{
+
+margin-top:25px;
+
+}
+
+.project-links a{
+
+display:inline-block;
+margin-right:15px;
+text-decoration:none;
+color:#60a5fa;
+
+}
+
+.timeline{
+
+border-left:3px solid #2563eb;
+padding-left:25px;
+
+}
+
+.timeline-item{
+
+margin-bottom:45px;
+
+}
+
+.timeline-item h3{
+
+font-size:23px;
+
+}
+
+.timeline-item span{
+
+color:#94a3b8;
+
+}
+
+.badges{
+
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+
+}
+
+.badge{
+
+background:#1e293b;
+padding:14px 20px;
+border-radius:12px;
+
+}
+
+footer{
+
+text-align:center;
+padding:50px;
+color:#94a3b8;
+
+}
+
+</style>
+
 </head>
+
 <body>
-    <h1>Hi, I'm Lakshya Maheshwari 👋</h1>
 
-    <h2>Business Strategy | Market Research | Finance</h2>
+<div class="container">
 
-    <p>
-        Welcome to my portfolio website.
-        I'm a second-year BBA student at DAVV interested in
-        Strategy Consulting, Market Research, and Finance.
-    </p>
+<nav>
 
-    <h3>Featured Projects</h3>
+<div class="logo">Lakshya Maheshwari</div>
 
-    <ul>
-        <li>📈 UrbanNest Growth Strategy</li>
-        <li>🚌 InstaBus AI Strategy Deck</li>
-    </ul>
+<div>
+
+<a href="#about">About</a>
+<a href="#projects">Projects</a>
+<a href="#experience">Experience</a>
+<a href="#contact">Contact</a>
+
+</div>
+
+</nav>
+
+<section class="hero">
+
+<h1>Business Strategy.<br>Finance.<br>Market Research.</h1>
+
+<h2>Building practical experience in consulting, business analysis and corporate finance.</h2>
+
+<a href="#" class="btn">Resume</a>
+
+<a href="https://linkedin.com" class="btn outline">LinkedIn</a>
+
+</section>
+
+<section id="about">
+
+<h2 class="section-title">About Me</h2>
+
+<p class="about">
+
+Hi, I'm <b>Lakshya Maheshwari</b>, a second-year BBA student at the <b>School of Commerce, Devi Ahilya Vishwavidyalaya (SOC-DAVV)</b> with a strong interest in business strategy, finance, and market research.
+
+<br><br>
+
+Through internships, consulting simulations, and independent projects, I've developed experience in growth strategy, competitive analysis, market research, and business problem-solving.
+
+<br><br>
+
+I'm currently building practical experience in strategy consulting while strengthening my foundation in finance and working toward a career in global financial services and strategy consulting.
+
+</p>
+
+</section>
+
+<section id="projects">
+
+<h2 class="section-title">Featured Projects</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>📈 UrbanNest</h3>
+
+<p>
+
+Growth strategy for a home furnishing retailer with a three-year expansion roadmap from ₹28 Cr to ₹80 Cr through market expansion, omnichannel strategy and operational improvements.
+
+</p>
+
+<div class="skills">
+
+<span class="skill">Growth Strategy</span>
+
+<span class="skill">Market Research</span>
+
+<span class="skill">Competitive Analysis</span>
+
+<span class="skill">Business Analysis</span>
+
+</div>
+
+<div class="project-links">
+
+<a href="#">Presentation →</a>
+
+<a href="#">Excel Model →</a>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>🚌 InstaBus AI</h3>
+
+<p>
+
+Investor pitch deck for an AI voice assistant designed for India's private bus operators with business model, market sizing and GTM strategy.
+
+</p>
+
+<div class="skills">
+
+<span class="skill">Market Sizing</span>
+
+<span class="skill">Business Strategy</span>
+
+<span class="skill">Business Model</span>
+
+<span class="skill">GTM Strategy</span>
+
+</div>
+
+<div class="project-links">
+
+<a href="#">View Deck →</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="experience">
+
+<h2 class="section-title">Experience</h2>
+
+<div class="timeline">
+
+<div class="timeline-item">
+
+<h3>Business Strategy Intern</h3>
+
+<span>Konsyte Private Limited • July 2026 – Present</span>
+
+</div>
+
+<div class="timeline-item">
+
+<h3>Market Research & Strategy Intern</h3>
+
+<span>Axeron Services LLP</span>
+
+</div>
+
+<div class="timeline-item">
+
+<h3>Research Intern</h3>
+
+<span>International Institute of Social Policy & Public Research</span>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">Certifications</h2>
+
+<div class="badges">
+
+<div class="badge">BCG Strategy Consulting</div>
+
+<div class="badge">Goldman Sachs</div>
+
+<div class="badge">McKinsey Forward</div>
+
+<div class="badge">Deloitte</div>
+
+<div class="badge">CFA Level I Candidate</div>
+
+</div>
+
+</section>
+
+<footer id="contact">
+
+<h2>Let's Connect</h2>
+
+<br>
+
+<p>Email • LinkedIn • GitHub</p>
+
+<br>
+
+<p>© 2026 Lakshya Maheshwari</p>
+
+</footer>
+
+</div>
 
 </body>
+
 </html>
