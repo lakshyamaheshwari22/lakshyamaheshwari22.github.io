@@ -179,22 +179,6 @@ align-items:flex-start;
 flex-wrap:wrap;
 gap:20px;
 animation:fadeUp .6s ease both;
-position:sticky;
-top:0;
-z-index:5;
-padding:16px 0;
-margin:-16px 0 20px;
-transition:background .4s cubic-bezier(.22,1,.36,1),backdrop-filter .4s cubic-bezier(.22,1,.36,1),box-shadow .4s cubic-bezier(.22,1,.36,1);
-
-}
-
-.header.scrolled{
-
-background:rgba(17,24,39,.75);
-backdrop-filter:blur(10px);
--webkit-backdrop-filter:blur(10px);
-box-shadow:0 8px 24px -12px rgba(0,0,0,.4);
-border-radius:0 0 16px 16px;
 
 }
 
@@ -215,13 +199,6 @@ background-size:200% auto;
 background-clip:text;
 color:transparent;
 animation:shimmer 6s linear infinite;
-transition:font-size .4s cubic-bezier(.22,1,.36,1);
-
-}
-
-.header.scrolled h1{
-
-font-size:26px;
 
 }
 
@@ -231,18 +208,6 @@ font-size:17px;
 color:#9ca3af;
 margin-top:6px;
 white-space:nowrap;
-max-height:30px;
-opacity:1;
-overflow:hidden;
-transition:max-height .4s cubic-bezier(.22,1,.36,1),opacity .3s ease,margin-top .4s cubic-bezier(.22,1,.36,1);
-
-}
-
-.header.scrolled .tagline{
-
-max-height:0;
-opacity:0;
-margin-top:0;
 
 }
 
@@ -812,11 +777,6 @@ font-size:13px;
 .spotlight{display:none;}
 .cursor-glow{display:none;}
 .exp-timeline::before{height:100% !important;}
-.header{position:relative;}
-.header.scrolled .tagline{max-height:none !important;opacity:1 !important;margin-top:6px !important;}
-.header.scrolled h1{font-size:42px !important;}
-.about-photo{transform:none !important;}
-.orb-wrap{opacity:.35 !important;}
 
 }
 
@@ -1147,45 +1107,12 @@ timelineObserver.observe(timelineEl);
 
 const progressBar = document.getElementById('scrollProgress');
 
-const headerEl = document.querySelector('.header');
-const aboutPhotoEl = document.querySelector('.about-photo');
-const orbWraps = document.querySelectorAll('.orb-wrap');
-
 function onScroll(){
 
 const scrollTop = window.scrollY;
 const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 progressBar.style.width = pct + '%';
-
-if(headerEl){
-
-if(scrollTop > 40){
-
-headerEl.classList.add('scrolled');
-
-} else {
-
-headerEl.classList.remove('scrolled');
-
-}
-
-}
-
-if(aboutPhotoEl){
-
-const rect = aboutPhotoEl.getBoundingClientRect();
-const centerOffset = rect.top - (window.innerHeight / 2);
-aboutPhotoEl.style.transform = `translateY(${centerOffset * -0.04}px)`;
-
-}
-
-if(orbWraps.length){
-
-const fade = Math.max(0.35, 1 - (scrollTop / (docHeight || 1)) * 0.7);
-orbWraps.forEach(w => { w.style.opacity = fade; });
-
-}
 
 }
 
