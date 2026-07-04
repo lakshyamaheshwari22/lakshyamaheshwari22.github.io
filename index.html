@@ -21,6 +21,73 @@ body{
 
 background:#111827;
 color:#e5e7eb;
+position:relative;
+overflow-x:hidden;
+
+}
+
+.bg-orb{
+
+position:fixed;
+border-radius:50%;
+filter:blur(90px);
+opacity:.35;
+z-index:0;
+pointer-events:none;
+
+}
+
+.bg-orb.one{
+
+width:420px;
+height:420px;
+background:#2563eb;
+top:-120px;
+left:-100px;
+animation:floatOne 18s ease-in-out infinite;
+
+}
+
+.bg-orb.two{
+
+width:380px;
+height:380px;
+background:#7c3aed;
+bottom:-140px;
+right:-80px;
+animation:floatTwo 22s ease-in-out infinite;
+
+}
+
+.bg-orb.three{
+
+width:300px;
+height:300px;
+background:#0ea5e9;
+top:40%;
+left:60%;
+animation:floatThree 26s ease-in-out infinite;
+
+}
+
+@keyframes floatOne{
+
+0%,100%{transform:translate(0,0);}
+50%{transform:translate(60px,80px);}
+
+}
+
+@keyframes floatTwo{
+
+0%,100%{transform:translate(0,0);}
+50%{transform:translate(-70px,-50px);}
+
+}
+
+@keyframes floatThree{
+
+0%,100%{transform:translate(0,0) scale(1);}
+50%{transform:translate(-40px,60px) scale(1.1);}
 
 }
 
@@ -29,6 +96,8 @@ color:#e5e7eb;
 width:min(1000px,92%);
 margin:auto;
 padding:60px 0 40px;
+position:relative;
+z-index:1;
 
 }
 
@@ -174,6 +243,13 @@ flex-wrap:wrap;
 
 }
 
+@keyframes glowPulse{
+
+0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.45);}
+50%{box-shadow:0 0 0 14px rgba(37,99,235,0);}
+
+}
+
 .about-photo{
 
 width:220px;
@@ -183,6 +259,7 @@ object-fit:cover;
 border:3px solid #2563eb;
 flex-shrink:0;
 margin:auto;
+animation:glowPulse 3s ease-out infinite;
 
 }
 
@@ -225,6 +302,13 @@ gap:8px;
 
 }
 
+@keyframes tagPop{
+
+from{opacity:0;transform:translateY(10px) scale(.9);}
+to{opacity:1;transform:translateY(0) scale(1);}
+
+}
+
 .tag{
 
 font-size:13px;
@@ -233,8 +317,19 @@ border:1px solid #374151;
 border-radius:6px;
 color:#cbd5e1;
 transition:border-color .25s,color .25s,transform .25s;
+opacity:0;
+animation:tagPop .5s ease forwards;
 
 }
+
+.tag:nth-child(1){animation-delay:.05s;}
+.tag:nth-child(2){animation-delay:.1s;}
+.tag:nth-child(3){animation-delay:.15s;}
+.tag:nth-child(4){animation-delay:.2s;}
+.tag:nth-child(5){animation-delay:.25s;}
+.tag:nth-child(6){animation-delay:.3s;}
+.tag:nth-child(7){animation-delay:.35s;}
+.tag:nth-child(8){animation-delay:.4s;}
 
 .tag:hover{
 
@@ -479,7 +574,8 @@ font-size:13px;
 @media (prefers-reduced-motion: reduce){
 
 *{animation:none !important;transition:none !important;}
-.section-title,.card,.exp-item{opacity:1 !important;transform:none !important;}
+.section-title,.card,.exp-item,.tag{opacity:1 !important;transform:none !important;}
+.bg-orb{display:none;}
 
 }
 
@@ -488,6 +584,10 @@ font-size:13px;
 </head>
 
 <body>
+
+<div class="bg-orb one"></div>
+<div class="bg-orb two"></div>
+<div class="bg-orb three"></div>
 
 <div class="container">
 
