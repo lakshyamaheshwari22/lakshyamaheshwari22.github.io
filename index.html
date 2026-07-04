@@ -119,11 +119,23 @@ animation:fadeUp .6s ease both;
 
 }
 
+@keyframes shimmer{
+
+0%{background-position:0% 50%;}
+100%{background-position:200% 50%;}
+
+}
+
 .header h1{
 
 font-size:42px;
 font-weight:700;
-color:#fff;
+background:linear-gradient(90deg,#fff,#93c5fd,#fff);
+background-size:200% auto;
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+animation:shimmer 6s linear infinite;
 
 }
 
@@ -166,7 +178,8 @@ transition:transform .25s ease,background .25s ease;
 .socials a:hover{
 
 background:#2563eb;
-transform:translateY(-3px);
+transform:translateY(-3px) scale(1.08);
+box-shadow:0 8px 18px -6px rgba(37,99,235,.7);
 
 }
 
@@ -260,6 +273,13 @@ border:3px solid #2563eb;
 flex-shrink:0;
 margin:auto;
 animation:glowPulse 3s ease-out infinite;
+transition:transform .4s ease;
+
+}
+
+.about-photo:hover{
+
+transform:scale(1.06);
 
 }
 
@@ -339,6 +359,21 @@ transform:translateY(-2px);
 
 }
 
+@keyframes dotPulse{
+
+0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.5);}
+50%{box-shadow:0 0 0 8px rgba(37,99,235,0);}
+
+}
+
+.exp-timeline{
+
+position:relative;
+padding-left:20px;
+border-left:2px solid #1f2937;
+
+}
+
 .exp-item{
 
 display:flex;
@@ -348,6 +383,21 @@ margin-bottom:44px;
 opacity:0;
 transform:translateY(18px);
 transition:opacity .55s ease,transform .55s ease;
+position:relative;
+
+}
+
+.exp-item::before{
+
+content:"";
+position:absolute;
+left:-27px;
+top:6px;
+width:12px;
+height:12px;
+border-radius:50%;
+background:#2563eb;
+animation:dotPulse 2.5s ease-out infinite;
 
 }
 
@@ -426,7 +476,8 @@ gap:26px;
 background:#1a2233;
 padding:28px;
 border-radius:16px;
-transition:transform .35s ease,box-shadow .35s ease;
+border:1px solid transparent;
+transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;
 opacity:0;
 transform:translateY(20px);
 
@@ -442,7 +493,8 @@ transform:translateY(0);
 .card:hover{
 
 transform:translateY(-6px);
-box-shadow:0 18px 30px -14px rgba(0,0,0,.5);
+box-shadow:0 18px 30px -14px rgba(0,0,0,.5),0 0 0 1px rgba(37,99,235,.4);
+border-color:#2563eb;
 
 }
 
@@ -451,6 +503,13 @@ box-shadow:0 18px 30px -14px rgba(0,0,0,.5);
 font-size:22px;
 margin-bottom:12px;
 color:#fff;
+transition:transform .3s ease;
+
+}
+
+.card:hover h3{
+
+transform:translateX(4px);
 
 }
 
@@ -520,6 +579,7 @@ transition:background .25s,transform .25s;
 
 background:#232e45;
 transform:translateY(-3px);
+box-shadow:0 8px 16px -8px rgba(37,99,235,.5);
 
 }
 
@@ -576,6 +636,9 @@ font-size:13px;
 *{animation:none !important;transition:none !important;}
 .section-title,.card,.exp-item,.tag{opacity:1 !important;transform:none !important;}
 .bg-orb{display:none;}
+.header h1{-webkit-background-clip:initial;background-clip:initial;color:#fff;}
+.exp-item::before{animation:none;}
+.about-photo{animation:none;}
 
 }
 
@@ -683,6 +746,8 @@ Through internships, consulting simulations, and independent projects, I've buil
 
 <hr class="divider">
 
+<div class="exp-timeline">
+
 <div class="exp-item">
 
 <div class="exp-left">
@@ -715,6 +780,8 @@ Incoming Business Strategy Intern, set to support strategy and growth-focused as
 
 <div class="role">Market Research &amp; Strategy Intern</div>
 
+<div class="dates">June 2026 – Present</div>
+
 </div>
 
 <div class="exp-right">
@@ -733,11 +800,15 @@ Conducted market research and strategic analysis focused on US equity markets, s
 
 <div class="role">Research Intern</div>
 
+<div class="dates">March 2026 – April 2026</div>
+
 </div>
 
 <div class="exp-right">
 
 Worked on geopolitical case studies, developing research and analytical skills applied to real-world policy and strategy questions.
+
+</div>
 
 </div>
 
