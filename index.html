@@ -81,79 +81,6 @@ transition:width .1s ease-out;
 
 }
 
-.orb-wrap{
-
-position:fixed;
-inset:0;
-z-index:0;
-pointer-events:none;
-will-change:transform;
-
-}
-
-.bg-orb{
-
-position:absolute;
-border-radius:50%;
-filter:blur(90px);
-opacity:.35;
-
-}
-
-.bg-orb.one{
-
-width:420px;
-height:420px;
-background:#2563eb;
-top:-120px;
-left:-100px;
-animation:floatOne 18s ease-in-out infinite;
-
-}
-
-.bg-orb.two{
-
-width:380px;
-height:380px;
-background:#7c3aed;
-bottom:-140px;
-right:-80px;
-animation:floatTwo 22s ease-in-out infinite;
-
-}
-
-.bg-orb.three{
-
-width:300px;
-height:300px;
-background:#0ea5e9;
-top:40%;
-left:60%;
-animation:floatThree 26s ease-in-out infinite;
-
-}
-
-@keyframes floatOne{
-
-0%,100%{transform:translate(0,0);}
-50%{transform:translate(60px,80px);}
-
-}
-
-@keyframes floatTwo{
-
-0%,100%{transform:translate(0,0);}
-50%{transform:translate(-70px,-50px);}
-
-}
-
-@keyframes floatThree{
-
-0%,100%{transform:translate(0,0) scale(1);}
-50%{transform:translate(-40px,60px) scale(1.1);}
-
-}
-
 .container{
 
 width:min(1000px,92%);
@@ -769,7 +696,6 @@ font-size:13px;
 *{animation:none !important;transition:none !important;}
 .section-title,.card,.exp-item,.tag,.about-text p{opacity:1 !important;transform:none !important;filter:none !important;}
 .section-title::after{width:60px !important;}
-.bg-orb{display:none;}
 .header h1{-webkit-background-clip:initial;background-clip:initial;color:#fff;}
 .exp-item::before{animation:none;}
 .about-photo{animation:none;}
@@ -791,10 +717,6 @@ font-size:13px;
 <div class="cursor-glow" id="cursorGlow"></div>
 
 <div class="scroll-progress" id="scrollProgress"></div>
-
-<div class="orb-wrap" id="orbWrapOne"><div class="bg-orb one"></div></div>
-<div class="orb-wrap" id="orbWrapTwo"><div class="bg-orb two"></div></div>
-<div class="orb-wrap" id="orbWrapThree"><div class="bg-orb three"></div></div>
 
 <div class="container">
 
