@@ -26,6 +26,19 @@ overflow-x:hidden;
 
 }
 
+.scroll-progress{
+
+position:fixed;
+top:0;
+left:0;
+height:3px;
+width:0%;
+background:linear-gradient(90deg,#2563eb,#7c3aed,#0ea5e9);
+z-index:10;
+transition:width .1s ease-out;
+
+}
+
 .bg-orb{
 
 position:fixed;
@@ -34,6 +47,7 @@ filter:blur(90px);
 opacity:.35;
 z-index:0;
 pointer-events:none;
+will-change:transform;
 
 }
 
@@ -229,6 +243,7 @@ margin-top:60px;
 opacity:0;
 transform:translateY(16px);
 transition:opacity .6s ease,transform .6s ease;
+position:relative;
 
 }
 
@@ -236,6 +251,25 @@ transition:opacity .6s ease,transform .6s ease;
 
 opacity:1;
 transform:translateY(0);
+
+}
+
+.section-title::after{
+
+content:"";
+display:block;
+width:0;
+height:3px;
+background:linear-gradient(90deg,#2563eb,#7c3aed);
+margin:12px auto 0;
+border-radius:2px;
+transition:width .6s ease .2s;
+
+}
+
+.section-title.in-view::after{
+
+width:60px;
 
 }
 
@@ -401,6 +435,10 @@ animation:dotPulse 2.5s ease-out infinite;
 
 }
 
+.exp-timeline .exp-item:nth-child(1){transition-delay:0s;}
+.exp-timeline .exp-item:nth-child(2){transition-delay:.1s;}
+.exp-timeline .exp-item:nth-child(3){transition-delay:.2s;}
+
 .exp-item.in-view{
 
 opacity:1;
@@ -512,6 +550,10 @@ transition:transform .3s ease;
 transform:translateX(4px);
 
 }
+
+.grid .card:nth-child(1){transition-delay:0s;}
+.grid .card:nth-child(2){transition-delay:.12s;}
+.grid .card:nth-child(3){transition-delay:.24s;}
 
 .card p{
 
@@ -639,10 +681,12 @@ font-size:13px;
 
 *{animation:none !important;transition:none !important;}
 .section-title,.card,.exp-item,.tag{opacity:1 !important;transform:none !important;}
+.section-title::after{width:60px !important;}
 .bg-orb{display:none;}
 .header h1{-webkit-background-clip:initial;background-clip:initial;color:#fff;}
 .exp-item::before{animation:none;}
 .about-photo{animation:none;}
+.scroll-progress{display:none;}
 
 }
 
@@ -651,6 +695,8 @@ font-size:13px;
 </head>
 
 <body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <div class="bg-orb one"></div>
 <div class="bg-orb two"></div>
@@ -870,7 +916,7 @@ Investor pitch deck for an AI voice assistant designed for India's private bus o
 
 <div class="badges">
 
-<a class="badge" href="Mckinsey%20Forward%20Certificate.pdf" target="_blank" rel="noopener">McKinsey Forward Program</a>
+<a class="badge" href="Mckinsey%20Forward%20Certificate.pdf" target="_blank" rel="noopener">McKinsey Forward Program Certificate</a>
 
 </div>
 
@@ -916,6 +962,20 @@ observer.unobserve(entry.target);
 }, { threshold: 0.15 });
 
 revealTargets.forEach(el => observer.observe(el));
+
+const progressBar = document.getElementById('scrollProgress');
+
+function onScroll(){
+
+const scrollTop = window.scrollY;
+const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+progressBar.style.width = pct + '%';
+
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
 </script>
 
