@@ -19,175 +19,357 @@ scroll-behavior:smooth;
 
 body{
 
-background:#0f172a;
-color:white;
+background:#111827;
+color:#e5e7eb;
 
 }
 
 .container{
 
-width:min(1100px,90%);
+width:min(1000px,92%);
 margin:auto;
+padding:60px 0 40px;
 
 }
 
-nav{
+@keyframes fadeUp{
+
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+
+}
+
+.header{
 
 display:flex;
 justify-content:space-between;
-align-items:center;
-padding:30px 0;
+align-items:flex-start;
+flex-wrap:wrap;
+gap:20px;
+animation:fadeUp .6s ease both;
 
 }
 
-.logo{
+.header h1{
 
-font-size:26px;
+font-size:42px;
 font-weight:700;
+color:#fff;
 
 }
 
-nav a{
+.header .tagline{
 
+font-size:17px;
+color:#9ca3af;
+margin-top:6px;
+
+}
+
+.header-right{
+
+text-align:right;
+
+}
+
+.socials{
+
+display:flex;
+gap:14px;
+justify-content:flex-end;
+margin-bottom:14px;
+
+}
+
+.socials a{
+
+width:42px;
+height:42px;
+border-radius:50%;
+background:#1f2937;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:transform .25s ease,background .25s ease;
+
+}
+
+.socials a:hover{
+
+background:#2563eb;
+transform:translateY(-3px);
+
+}
+
+.socials svg{
+
+width:20px;
+height:20px;
+fill:#e5e7eb;
+
+}
+
+.contact-lines{
+
+font-size:14px;
+color:#9ca3af;
+line-height:1.8;
+
+}
+
+.contact-lines b{
+
+color:#e5e7eb;
+
+}
+
+.contact-lines a{
+
+color:#e5e7eb;
 text-decoration:none;
-color:white;
-margin-left:25px;
-transition:.3s;
+font-weight:600;
 
 }
 
-nav a:hover{
+.contact-lines a:hover{
 
 color:#60a5fa;
 
 }
 
-.hero{
-
-padding:110px 0;
-
-}
-
-.hero h1{
-
-font-size:58px;
-margin-bottom:18px;
-
-}
-
-.hero h2{
-
-font-weight:400;
-color:#94a3b8;
-margin-bottom:35px;
-
-}
-
-.btn{
-
-display:inline-block;
-padding:14px 28px;
-background:#2563eb;
-border-radius:10px;
-text-decoration:none;
-color:white;
-font-weight:600;
-margin-right:15px;
-transition:.3s;
-
-}
-
-.btn:hover{
-
-background:#1d4ed8;
-
-}
-
-.outline{
-
-background:transparent;
-border:2px solid #2563eb;
-
-}
-
-section{
-
-padding:90px 0;
-
-}
-
 .section-title{
 
-font-size:38px;
-margin-bottom:45px;
+text-align:center;
+font-size:26px;
+font-weight:600;
+color:#fff;
+margin-top:60px;
+opacity:0;
+transform:translateY(16px);
+transition:opacity .6s ease,transform .6s ease;
 
 }
 
-.about{
+.section-title.in-view{
 
-font-size:18px;
-line-height:1.9;
+opacity:1;
+transform:translateY(0);
+
+}
+
+.divider{
+
+border:none;
+border-top:2px dashed #374151;
+margin:14px 0 36px;
+
+}
+
+.about-grid{
+
+display:flex;
+gap:45px;
+align-items:flex-start;
+flex-wrap:wrap;
+
+}
+
+.about-photo{
+
+width:220px;
+height:220px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #2563eb;
+flex-shrink:0;
+margin:auto;
+
+}
+
+.about-text{
+
+flex:1;
+min-width:280px;
+
+}
+
+.about-text p{
+
+font-size:16px;
+line-height:1.85;
 color:#cbd5e1;
+margin-bottom:20px;
+
+}
+
+.about-text b{
+
+color:#fff;
+
+}
+
+.tech-label{
+
+font-size:15px;
+color:#e5e7eb;
+font-weight:600;
+margin-bottom:10px;
+
+}
+
+.tags{
+
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+
+}
+
+.tag{
+
+font-size:13px;
+padding:6px 12px;
+border:1px solid #374151;
+border-radius:6px;
+color:#cbd5e1;
+transition:border-color .25s,color .25s,transform .25s;
+
+}
+
+.tag:hover{
+
+border-color:#2563eb;
+color:#fff;
+transform:translateY(-2px);
+
+}
+
+.exp-item{
+
+display:flex;
+gap:40px;
+flex-wrap:wrap;
+margin-bottom:44px;
+opacity:0;
+transform:translateY(18px);
+transition:opacity .55s ease,transform .55s ease;
+
+}
+
+.exp-item.in-view{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+.exp-left{
+
+width:230px;
+flex-shrink:0;
+
+}
+
+.exp-left h3{
+
+font-size:19px;
+color:#fff;
+margin-bottom:4px;
+
+}
+
+.exp-left .role{
+
+font-size:14px;
+font-weight:600;
+color:#93c5fd;
+margin-top:8px;
+
+}
+
+.exp-left .dates{
+
+font-size:13px;
+color:#9ca3af;
+margin-top:4px;
+
+}
+
+.exp-right{
+
+flex:1;
+min-width:280px;
+font-size:15px;
+line-height:1.8;
+color:#cbd5e1;
+padding-top:2px;
+
+}
+
+.upcoming-tag{
+
+display:inline-block;
+margin-top:10px;
+font-size:12px;
+padding:4px 10px;
+border-radius:20px;
+background:#1e3a8a;
+color:#bfdbfe;
 
 }
 
 .grid{
 
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:30px;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:26px;
 
 }
 
 .card{
 
-background:#172554;
-padding:30px;
-border-radius:20px;
-transition:.3s;
+background:#1a2233;
+padding:28px;
+border-radius:16px;
+transition:transform .35s ease,box-shadow .35s ease;
+opacity:0;
+transform:translateY(20px);
+
+}
+
+.card.in-view{
+
+opacity:1;
+transform:translateY(0);
 
 }
 
 .card:hover{
 
-transform:translateY(-8px);
+transform:translateY(-6px);
+box-shadow:0 18px 30px -14px rgba(0,0,0,.5);
 
 }
 
 .card h3{
 
-font-size:28px;
-margin-bottom:15px;
+font-size:22px;
+margin-bottom:12px;
+color:#fff;
 
 }
 
 .card p{
 
-line-height:1.8;
+line-height:1.75;
 color:#cbd5e1;
-
-}
-
-.skills{
-
-margin-top:20px;
-
-}
-
-.skill{
-
-display:inline-block;
-padding:8px 14px;
-margin:5px;
-background:#1e3a8a;
-border-radius:20px;
-font-size:14px;
+font-size:15px;
 
 }
 
 .project-links{
 
-margin-top:25px;
+margin-top:20px;
 
 }
 
@@ -197,31 +379,27 @@ display:inline-block;
 margin-right:15px;
 text-decoration:none;
 color:#60a5fa;
+font-size:14px;
+transition:color .25s;
 
 }
 
-.timeline{
+.project-links a span{
 
-border-left:3px solid #2563eb;
-padding-left:25px;
-
-}
-
-.timeline-item{
-
-margin-bottom:45px;
+display:inline-block;
+transition:transform .25s ease;
 
 }
 
-.timeline-item h3{
+.project-links a:hover{
 
-font-size:23px;
+color:#93c5fd;
 
 }
 
-.timeline-item span{
+.project-links a:hover span{
 
-color:#94a3b8;
+transform:translateX(5px);
 
 }
 
@@ -229,23 +407,40 @@ color:#94a3b8;
 
 display:flex;
 flex-wrap:wrap;
-gap:15px;
+gap:12px;
 
 }
 
 .badge{
 
-background:#1e293b;
-padding:14px 20px;
-border-radius:12px;
+background:#1a2233;
+padding:12px 18px;
+border-radius:10px;
+font-size:14px;
+transition:background .25s,transform .25s;
+
+}
+
+.badge:hover{
+
+background:#232e45;
+transform:translateY(-3px);
 
 }
 
 footer{
 
 text-align:center;
-padding:50px;
-color:#94a3b8;
+padding:60px 0 30px;
+color:#9ca3af;
+
+}
+
+footer h2{
+
+color:#fff;
+font-size:24px;
+margin-bottom:16px;
 
 }
 
@@ -262,6 +457,32 @@ text-decoration:underline;
 
 }
 
+footer .copyright{
+
+margin-top:20px;
+font-size:13px;
+
+}
+
+@media (max-width:640px){
+
+.header{flex-direction:column;}
+.header-right{text-align:left;}
+.socials{justify-content:flex-start;}
+.about-grid{flex-direction:column;align-items:center;text-align:center;}
+.tags{justify-content:center;}
+.exp-item{flex-direction:column;}
+.exp-left{width:100%;}
+
+}
+
+@media (prefers-reduced-motion: reduce){
+
+*{animation:none !important;transition:none !important;}
+.section-title,.card,.exp-item{opacity:1 !important;transform:none !important;}
+
+}
+
 </style>
 
 </head>
@@ -270,56 +491,159 @@ text-decoration:underline;
 
 <div class="container">
 
-<nav>
-
-<div class="logo">Lakshya Maheshwari</div>
+<div class="header">
 
 <div>
 
-<a href="#about">About</a>
-<a href="#projects">Projects</a>
-<a href="#experience">Experience</a>
-<a href="#contact">Contact</a>
+<h1>Lakshya Maheshwari</h1>
+
+<div class="tagline">BBA (Foreign Trade) Student | Aspiring Finance &amp; Strategy Consulting Professional</div>
 
 </div>
 
-</nav>
+<div class="header-right">
 
-<section class="hero">
+<div class="socials">
 
-<h1>Business Strategy.<br>Finance.<br>Market Research.</h1>
+<a href="https://github.com/lakshyamaheshwari22" target="_blank" rel="noopener" aria-label="GitHub">
 
-<h2>Building practical experience in consulting, business analysis and corporate finance.</h2>
+<svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.42 7.86 10.95.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.55A11.5 11.5 0 0 0 23.5 12c0-6.35-5.15-11.5-11.5-11.5Z"/></svg>
 
-<a href="Resume.pdf" class="btn outline" target="_blank" rel="noopener">Resume</a>
+</a>
 
-<a href="https://www.linkedin.com/in/lakshya-maheshwari-64a411372" class="btn outline" target="_blank" rel="noopener">LinkedIn</a>
+<a href="https://www.linkedin.com/in/lakshya-maheshwari-64a411372" target="_blank" rel="noopener" aria-label="LinkedIn">
 
-</section>
+<svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.11 20.45H3.56V9h3.55v11.45Z"/></svg>
 
-<section id="about">
+</a>
+
+</div>
+
+<div class="contact-lines">
+
+Email: <a href="mailto:lakshyamaheshwari2614@gmail.com">lakshyamaheshwari2614@gmail.com</a><br>
+
+Web: <a href="https://lakshyamaheshwari22.github.io" target="_blank" rel="noopener">lakshyamaheshwari22.github.io</a>
+
+</div>
+
+</div>
+
+</div>
 
 <h2 class="section-title">About Me</h2>
 
-<p class="about">
+<hr class="divider">
 
-Hi, I'm <b>Lakshya Maheshwari</b>, a second-year BBA student at the <b>School of Commerce, Devi Ahilya Vishwavidyalaya (SOC-DAVV)</b> with a strong interest in business strategy, finance, and market research.
+<div class="about-grid">
 
-<br><br>
+<img class="about-photo" src="profile.jpg" alt="Lakshya Maheshwari">
 
-Through internships, consulting simulations, and independent projects, I've developed experience in growth strategy, competitive analysis, market research, and business problem-solving.
+<div class="about-text">
 
-<br><br>
+<p>
 
-I'm currently building practical experience in strategy consulting while strengthening my foundation in finance and working toward a career in global financial services and strategy consulting.
+Hi, I'm <b>Lakshya Maheshwari</b>, a second-year BBA (Foreign Trade) student at the <b>School of Commerce, Devi Ahilya Vishwavidyalaya (SOC-DAVV)</b>, with a strong interest in business strategy, finance, and market research.
 
 </p>
 
-</section>
+<p>
 
-<section id="projects">
+Through internships, consulting simulations, and independent projects, I've built experience in growth strategy, competitive analysis, market research, and business problem-solving. I'm also a CFA Level I candidate, working toward a career in global financial services and strategy consulting.
+
+</p>
+
+<div class="tech-label">Areas of Focus:</div>
+
+<div class="tags">
+
+<span class="tag">Business Strategy</span>
+
+<span class="tag">Market Research</span>
+
+<span class="tag">Financial Modelling</span>
+
+<span class="tag">Competitive Analysis</span>
+
+<span class="tag">Growth Strategy</span>
+
+<span class="tag">Equity Research</span>
+
+<span class="tag">Excel</span>
+
+<span class="tag">PowerPoint</span>
+
+</div>
+
+</div>
+
+</div>
+
+<h2 class="section-title">Experience</h2>
+
+<hr class="divider">
+
+<div class="exp-item">
+
+<div class="exp-left">
+
+<h3>Konsyte Private Limited</h3>
+
+<div class="role">Business Strategy Intern</div>
+
+<div class="dates">July 2026 – Present</div>
+
+<div class="upcoming-tag">Role starting soon</div>
+
+</div>
+
+<div class="exp-right">
+
+Incoming Business Strategy Intern, set to work on strategy and growth-focused assignments as the role begins.
+
+</div>
+
+</div>
+
+<div class="exp-item">
+
+<div class="exp-left">
+
+<h3>Axeron Services LLP</h3>
+
+<div class="role">Market Research &amp; Strategy Intern</div>
+
+</div>
+
+<div class="exp-right">
+
+Conducted market research and strategic analysis focused on US equity markets, supporting research-driven insights for investment and business strategy.
+
+</div>
+
+</div>
+
+<div class="exp-item">
+
+<div class="exp-left">
+
+<h3>International Institute of Social Policy &amp; Public Research</h3>
+
+<div class="role">Research Intern</div>
+
+</div>
+
+<div class="exp-right">
+
+Worked on geopolitical case studies, developing research and analytical skills applied to real-world policy and strategy questions.
+
+</div>
+
+</div>
 
 <h2 class="section-title">Featured Projects</h2>
+
+<hr class="divider">
 
 <div class="grid">
 
@@ -333,23 +657,11 @@ Growth strategy for a home furnishing retailer with a three-year expansion roadm
 
 </p>
 
-<div class="skills">
-
-<span class="skill">Growth Strategy</span>
-
-<span class="skill">Market Research</span>
-
-<span class="skill">Competitive Analysis</span>
-
-<span class="skill">Business Analysis</span>
-
-</div>
-
 <div class="project-links">
 
-<a href="UrbanNest%20Expansion%20Plan.pptx" target="_blank" rel="noopener">Presentation →</a>
+<a href="UrbanNest%20Expansion%20Plan.pptx" target="_blank" rel="noopener">Presentation <span>→</span></a>
 
-<a href="UrbanNest%20Growth%20Strategy.xlsx" target="_blank" rel="noopener">Excel Model →</a>
+<a href="UrbanNest%20Growth%20Strategy.xlsx" target="_blank" rel="noopener">Excel Model <span>→</span></a>
 
 </div>
 
@@ -365,83 +677,29 @@ Investor pitch deck for an AI voice assistant designed for India's private bus o
 
 </p>
 
-<div class="skills">
-
-<span class="skill">Market Sizing</span>
-
-<span class="skill">Business Strategy</span>
-
-<span class="skill">Business Model</span>
-
-<span class="skill">GTM Strategy</span>
-
-</div>
-
 <div class="project-links">
 
-<a href="InstaBus%20Pitch%20Deck.pdf" target="_blank" rel="noopener">View Deck →</a>
+<a href="InstaBus%20Pitch%20Deck.pdf" target="_blank" rel="noopener">View Deck <span>→</span></a>
 
 </div>
 
 </div>
 
 </div>
-
-</section>
-
-<section id="experience">
-
-<h2 class="section-title">Experience</h2>
-
-<div class="timeline">
-
-<div class="timeline-item">
-
-<h3>Business Strategy Intern</h3>
-
-<span>Konsyte Private Limited • July 2026 – Present</span>
-
-</div>
-
-<div class="timeline-item">
-
-<h3>Market Research & Strategy Intern</h3>
-
-<span>Axeron Services LLP</span>
-
-</div>
-
-<div class="timeline-item">
-
-<h3>Research Intern</h3>
-
-<span>International Institute of Social Policy & Public Research</span>
-
-</div>
-
-</div>
-
-</section>
-
-<section>
 
 <h2 class="section-title">Certifications</h2>
+
+<hr class="divider">
 
 <div class="badges">
 
 <div class="badge">McKinsey Forward</div>
 
-<div class="badge">CFA Level I Candidate</div>
-
 </div>
-
-</section>
 
 <footer id="contact">
 
 <h2>Let's Connect</h2>
-
-<br>
 
 <p>
 
@@ -449,17 +707,40 @@ Investor pitch deck for an AI voice assistant designed for India's private bus o
 
 <a href="https://www.linkedin.com/in/lakshya-maheshwari-64a411372" target="_blank" rel="noopener">LinkedIn</a> •
 
-<a href="https://github.com/lakshyamaheshwari22" target="_blank" rel="noopener">GitHub</a>
+<a href="https://github.com/lakshyamaheshwari22" target="_blank" rel="noopener">GitHub</a> •
+
+<a href="Resume.pdf" target="_blank" rel="noopener">Resume</a>
 
 </p>
 
-<br>
-
-<p>© 2026 Lakshya Maheshwari</p>
+<div class="copyright">© 2026 Lakshya Maheshwari</div>
 
 </footer>
 
 </div>
+
+<script>
+
+const revealTargets = document.querySelectorAll('.section-title, .card, .exp-item');
+
+const observer = new IntersectionObserver((entries) => {
+
+entries.forEach(entry => {
+
+if(entry.isIntersecting){
+
+entry.target.classList.add('in-view');
+observer.unobserve(entry.target);
+
+}
+
+});
+
+}, { threshold: 0.15 });
+
+revealTargets.forEach(el => observer.observe(el));
+
+</script>
 
 </body>
 
