@@ -17,12 +17,20 @@ font-family:Inter,sans-serif;
 scroll-behavior:smooth;
 }
 
+@keyframes pageFadeIn{
+
+from{opacity:0;}
+to{opacity:1;}
+
+}
+
 body{
 
 background:#111827;
 color:#e5e7eb;
 position:relative;
 overflow-x:hidden;
+animation:pageFadeIn .5s ease both;
 
 }
 
@@ -171,6 +179,22 @@ align-items:flex-start;
 flex-wrap:wrap;
 gap:20px;
 animation:fadeUp .6s ease both;
+position:sticky;
+top:0;
+z-index:5;
+padding:16px 0;
+margin:-16px 0 20px;
+transition:background .4s cubic-bezier(.22,1,.36,1),backdrop-filter .4s cubic-bezier(.22,1,.36,1),box-shadow .4s cubic-bezier(.22,1,.36,1);
+
+}
+
+.header.scrolled{
+
+background:rgba(17,24,39,.75);
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
+box-shadow:0 8px 24px -12px rgba(0,0,0,.4);
+border-radius:0 0 16px 16px;
 
 }
 
@@ -191,6 +215,13 @@ background-size:200% auto;
 background-clip:text;
 color:transparent;
 animation:shimmer 6s linear infinite;
+transition:font-size .4s cubic-bezier(.22,1,.36,1);
+
+}
+
+.header.scrolled h1{
+
+font-size:26px;
 
 }
 
@@ -199,6 +230,19 @@ animation:shimmer 6s linear infinite;
 font-size:17px;
 color:#9ca3af;
 margin-top:6px;
+white-space:nowrap;
+max-height:30px;
+opacity:1;
+overflow:hidden;
+transition:max-height .4s cubic-bezier(.22,1,.36,1),opacity .3s ease,margin-top .4s cubic-bezier(.22,1,.36,1);
+
+}
+
+.header.scrolled .tagline{
+
+max-height:0;
+opacity:0;
+margin-top:0;
 
 }
 
@@ -262,15 +306,35 @@ color:#e5e7eb;
 
 .contact-lines a{
 
+position:relative;
 color:#e5e7eb;
 text-decoration:none;
 font-weight:600;
 
 }
 
+.contact-lines a::after{
+
+content:"";
+position:absolute;
+left:0;
+bottom:-2px;
+width:0;
+height:1px;
+background:#60a5fa;
+transition:width .4s cubic-bezier(.22,1,.36,1);
+
+}
+
 .contact-lines a:hover{
 
 color:#60a5fa;
+
+}
+
+.contact-lines a:hover::after{
+
+width:100%;
 
 }
 
@@ -283,7 +347,7 @@ color:#fff;
 margin-top:60px;
 opacity:0;
 transform:translateY(16px);
-transition:opacity .6s ease,transform .6s ease;
+transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);
 position:relative;
 
 }
@@ -348,7 +412,7 @@ border:3px solid #2563eb;
 flex-shrink:0;
 margin:auto;
 animation:glowPulse 3s ease-out infinite;
-transition:transform .4s ease;
+transition:transform .5s cubic-bezier(.22,1,.36,1);
 
 }
 
@@ -371,8 +435,22 @@ font-size:16px;
 line-height:1.85;
 color:#cbd5e1;
 margin-bottom:20px;
+opacity:0;
+filter:blur(6px);
+transform:translateY(10px);
+transition:opacity .8s cubic-bezier(.22,1,.36,1),filter .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);
 
 }
+
+.about-text p.in-view{
+
+opacity:1;
+filter:blur(0);
+transform:translateY(0);
+
+}
+
+.about-text p:nth-child(2){transition-delay:.12s;}
 
 .about-text b{
 
@@ -476,7 +554,7 @@ flex-wrap:wrap;
 margin-bottom:44px;
 opacity:0;
 transform:translateY(18px);
-transition:opacity .55s ease,transform .55s ease;
+transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1);
 position:relative;
 
 }
@@ -576,7 +654,7 @@ background:#1a2233;
 padding:28px;
 border-radius:16px;
 border:1px solid transparent;
-transition:box-shadow .35s ease,border-color .35s ease,transform .15s ease-out;
+transition:box-shadow .5s cubic-bezier(.22,1,.36,1),border-color .5s cubic-bezier(.22,1,.36,1),transform .15s ease-out,opacity .6s cubic-bezier(.22,1,.36,1);
 opacity:0;
 transform:translateY(20px);
 transform-style:preserve-3d;
@@ -612,9 +690,7 @@ transform:translateX(4px);
 
 }
 
-.grid .card:nth-child(1){transition-delay:0s;}
-.grid .card:nth-child(2){transition-delay:.12s;}
-.grid .card:nth-child(3){transition-delay:.24s;}
+
 
 .card p{
 
@@ -660,36 +736,6 @@ transform:translateX(5px);
 
 }
 
-.badges{
-
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-
-}
-
-.badge{
-
-display:inline-block;
-background:#1a2233;
-padding:12px 18px;
-border-radius:10px;
-font-size:14px;
-color:#e5e7eb;
-text-decoration:none;
-transition:background .25s,transform .25s,box-shadow .25s;
-
-}
-
-.badge:hover{
-
-background:#232e45;
-transform:translateY(-3px);
-box-shadow:0 8px 16px -8px rgba(37,99,235,.5);
-color:#93c5fd;
-
-}
-
 footer{
 
 text-align:center;
@@ -708,14 +754,28 @@ margin-bottom:16px;
 
 footer a{
 
+position:relative;
 color:#60a5fa;
 text-decoration:none;
 
 }
 
-footer a:hover{
+footer a::after{
 
-text-decoration:underline;
+content:"";
+position:absolute;
+left:0;
+bottom:-2px;
+width:0;
+height:1px;
+background:#93c5fd;
+transition:width .4s cubic-bezier(.22,1,.36,1);
+
+}
+
+footer a:hover::after{
+
+width:100%;
 
 }
 
@@ -735,13 +795,14 @@ font-size:13px;
 .tags{justify-content:center;}
 .exp-item{flex-direction:column;}
 .exp-left{width:100%;}
+.header .tagline{font-size:13px;}
 
 }
 
 @media (prefers-reduced-motion: reduce){
 
 *{animation:none !important;transition:none !important;}
-.section-title,.card,.exp-item,.tag{opacity:1 !important;transform:none !important;}
+.section-title,.card,.exp-item,.tag,.about-text p{opacity:1 !important;transform:none !important;filter:none !important;}
 .section-title::after{width:60px !important;}
 .bg-orb{display:none;}
 .header h1{-webkit-background-clip:initial;background-clip:initial;color:#fff;}
@@ -751,6 +812,11 @@ font-size:13px;
 .spotlight{display:none;}
 .cursor-glow{display:none;}
 .exp-timeline::before{height:100% !important;}
+.header{position:relative;}
+.header.scrolled .tagline{max-height:none !important;opacity:1 !important;margin-top:6px !important;}
+.header.scrolled h1{font-size:42px !important;}
+.about-photo{transform:none !important;}
+.orb-wrap{opacity:.35 !important;}
 
 }
 
@@ -778,7 +844,7 @@ font-size:13px;
 
 <h1>Lakshya Maheshwari</h1>
 
-<div class="tagline">BBA (Foreign Trade) Student | Aspiring Finance &amp; Strategy Consulting Professional</div>
+<div class="tagline">Incoming Strategy @ Konsyte | Market Research &amp; Business Strategy | McKinsey Forward '26</div>
 
 </div>
 
@@ -830,7 +896,7 @@ Hi, I'm Lakshya Maheshwari, a second-year BBA (Foreign Trade) student at the Sch
 
 <p>
 
-Through internships, consulting simulations, and independent projects, I've built experience in growth strategy, competitive analysis, market research, and business problem-solving. I'm also a CFA Level I candidate, working toward a career in global financial services and strategy consulting.
+Through internships, consulting simulations, and independent projects, I've built experience in growth strategy, competitive analysis, market research, and business problem-solving, working toward a career in global financial services and strategy consulting.
 
 </p>
 
@@ -849,10 +915,6 @@ Through internships, consulting simulations, and independent projects, I've buil
 <span class="tag">Growth Strategy</span>
 
 <span class="tag">Equity Research</span>
-
-<span class="tag">Excel</span>
-
-<span class="tag">PowerPoint</span>
 
 </div>
 
@@ -914,7 +976,7 @@ Conducted market research and strategic analysis focused on US equity markets, s
 
 <div class="exp-left">
 
-<h3>International Institute of Social Policy &amp; Public Research</h3>
+<h3>International Institute of SDG's and Public Policy Research</h3>
 
 <div class="role">Research Intern</div>
 
@@ -925,6 +987,26 @@ Conducted market research and strategic analysis focused on US equity markets, s
 <div class="exp-right">
 
 Worked on geopolitical case studies, developing research and analytical skills applied to real-world policy and strategy questions.
+
+</div>
+
+</div>
+
+<div class="exp-item">
+
+<div class="exp-left">
+
+<h3>Techfest, IIT Bombay</h3>
+
+<div class="role">Campus Ambassador</div>
+
+<div class="dates">June 2026 – Present</div>
+
+</div>
+
+<div class="exp-right">
+
+Conducted competitive and market research to identify trends and support audience engagement strategies across digital platforms, alongside social media outreach, SEO initiatives, and event planning and coordination.
 
 </div>
 
@@ -978,16 +1060,6 @@ Investor pitch deck for an AI voice assistant designed for India's private bus o
 
 </div>
 
-<h2 class="section-title">Certifications</h2>
-
-<hr class="divider">
-
-<div class="badges">
-
-<a class="badge" href="Mckinsey%20Forward%20Certificate.pdf" target="_blank" rel="noopener">McKinsey Forward Program</a>
-
-</div>
-
 <footer id="contact">
 
 <h2>Let's Connect</h2>
@@ -1012,7 +1084,13 @@ Investor pitch deck for an AI voice assistant designed for India's private bus o
 
 <script>
 
-const revealTargets = document.querySelectorAll('.section-title, .card, .exp-item');
+const revealTargets = document.querySelectorAll('.section-title, .card, .exp-item, .about-text p');
+
+document.querySelectorAll('.grid .card').forEach((card, i) => {
+
+card.style.transitionDelay = (i * 0.12) + 's';
+
+});
 const timelineEl = document.querySelector('.exp-timeline');
 
 const observer = new IntersectionObserver((entries) => {
@@ -1022,6 +1100,18 @@ entries.forEach(entry => {
 if(entry.isIntersecting){
 
 entry.target.classList.add('in-view');
+
+if(entry.target.classList.contains('card')){
+
+const delay = parseFloat(entry.target.style.transitionDelay) || 0;
+
+setTimeout(() => {
+
+entry.target.style.transitionDelay = '0s';
+
+}, (delay + 0.4) * 1000);
+
+}
 
 } else {
 
@@ -1057,12 +1147,45 @@ timelineObserver.observe(timelineEl);
 
 const progressBar = document.getElementById('scrollProgress');
 
+const headerEl = document.querySelector('.header');
+const aboutPhotoEl = document.querySelector('.about-photo');
+const orbWraps = document.querySelectorAll('.orb-wrap');
+
 function onScroll(){
 
 const scrollTop = window.scrollY;
 const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 progressBar.style.width = pct + '%';
+
+if(headerEl){
+
+if(scrollTop > 40){
+
+headerEl.classList.add('scrolled');
+
+} else {
+
+headerEl.classList.remove('scrolled');
+
+}
+
+}
+
+if(aboutPhotoEl){
+
+const rect = aboutPhotoEl.getBoundingClientRect();
+const centerOffset = rect.top - (window.innerHeight / 2);
+aboutPhotoEl.style.transform = `translateY(${centerOffset * -0.04}px)`;
+
+}
+
+if(orbWraps.length){
+
+const fade = Math.max(0.35, 1 - (scrollTop / (docHeight || 1)) * 0.7);
+orbWraps.forEach(w => { w.style.opacity = fade; });
+
+}
 
 }
 
