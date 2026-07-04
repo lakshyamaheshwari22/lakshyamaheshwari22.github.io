@@ -26,6 +26,40 @@ overflow-x:hidden;
 
 }
 
+.spotlight{
+
+position:fixed;
+top:0;
+left:0;
+width:600px;
+height:600px;
+border-radius:50%;
+background:radial-gradient(circle,rgba(37,99,235,.16) 0%,rgba(37,99,235,0) 70%);
+pointer-events:none;
+z-index:2;
+transform:translate(-300px,-300px);
+transition:opacity .3s ease;
+opacity:0;
+
+}
+
+.cursor-glow{
+
+position:fixed;
+width:500px;
+height:500px;
+border-radius:50%;
+background:radial-gradient(circle,rgba(124,58,237,.14) 0%,rgba(124,58,237,0) 70%);
+pointer-events:none;
+z-index:1;
+transform:translate(-50%,-50%);
+left:0;
+top:0;
+opacity:0;
+transition:opacity .4s ease,left .6s cubic-bezier(.16,1,.3,1),top .6s cubic-bezier(.16,1,.3,1);
+
+}
+
 .scroll-progress{
 
 position:fixed;
@@ -39,15 +73,22 @@ transition:width .1s ease-out;
 
 }
 
-.bg-orb{
+.orb-wrap{
 
 position:fixed;
-border-radius:50%;
-filter:blur(90px);
-opacity:.35;
+inset:0;
 z-index:0;
 pointer-events:none;
 will-change:transform;
+
+}
+
+.bg-orb{
+
+position:absolute;
+border-radius:50%;
+filter:blur(90px);
+opacity:.35;
 
 }
 
@@ -140,6 +181,13 @@ animation:fadeUp .6s ease both;
 
 }
 
+@keyframes letterUp{
+
+from{opacity:0;transform:translateY(30px) rotateX(45deg);}
+to{opacity:1;transform:translateY(0) rotateX(0);}
+
+}
+
 .header h1{
 
 font-size:42px;
@@ -150,6 +198,15 @@ background-size:200% auto;
 background-clip:text;
 color:transparent;
 animation:shimmer 6s linear infinite;
+perspective:600px;
+
+}
+
+.header h1 span{
+
+display:inline-block;
+opacity:0;
+animation:letterUp .6s cubic-bezier(.2,.9,.3,1) forwards;
 
 }
 
@@ -185,7 +242,7 @@ background:#1f2937;
 display:flex;
 align-items:center;
 justify-content:center;
-transition:transform .25s ease,background .25s ease;
+transition:transform .2s ease,background .25s ease;
 
 }
 
@@ -408,6 +465,25 @@ border-left:2px solid #1f2937;
 
 }
 
+.exp-timeline::before{
+
+content:"";
+position:absolute;
+left:-2px;
+top:0;
+width:2px;
+height:0;
+background:linear-gradient(180deg,#2563eb,#7c3aed);
+transition:height 1.2s cubic-bezier(.2,.9,.3,1);
+
+}
+
+.exp-timeline.in-view::before{
+
+height:100%;
+
+}
+
 .exp-item{
 
 display:flex;
@@ -506,6 +582,7 @@ color:#bfdbfe;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 gap:26px;
+perspective:1000px;
 
 }
 
@@ -515,9 +592,10 @@ background:#1a2233;
 padding:28px;
 border-radius:16px;
 border:1px solid transparent;
-transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;
+transition:box-shadow .35s ease,border-color .35s ease,transform .15s ease-out;
 opacity:0;
 transform:translateY(20px);
+transform-style:preserve-3d;
 
 }
 
@@ -530,8 +608,7 @@ transform:translateY(0);
 
 .card:hover{
 
-transform:translateY(-6px);
-box-shadow:0 18px 30px -14px rgba(0,0,0,.5),0 0 0 1px rgba(37,99,235,.4);
+box-shadow:0 22px 40px -16px rgba(0,0,0,.55),0 0 0 1px rgba(37,99,235,.4);
 border-color:#2563eb;
 
 }
@@ -680,13 +757,16 @@ font-size:13px;
 @media (prefers-reduced-motion: reduce){
 
 *{animation:none !important;transition:none !important;}
-.section-title,.card,.exp-item,.tag{opacity:1 !important;transform:none !important;}
+.section-title,.card,.exp-item,.tag,.header h1 span{opacity:1 !important;transform:none !important;}
 .section-title::after{width:60px !important;}
 .bg-orb{display:none;}
 .header h1{-webkit-background-clip:initial;background-clip:initial;color:#fff;}
 .exp-item::before{animation:none;}
 .about-photo{animation:none;}
 .scroll-progress{display:none;}
+.spotlight{display:none;}
+.cursor-glow{display:none;}
+.exp-timeline::before{height:100% !important;}
 
 }
 
@@ -696,11 +776,15 @@ font-size:13px;
 
 <body>
 
+<div class="spotlight" id="spotlight"></div>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
 <div class="scroll-progress" id="scrollProgress"></div>
 
-<div class="bg-orb one"></div>
-<div class="bg-orb two"></div>
-<div class="bg-orb three"></div>
+<div class="orb-wrap" id="orbWrapOne"><div class="bg-orb one"></div></div>
+<div class="orb-wrap" id="orbWrapTwo"><div class="bg-orb two"></div></div>
+<div class="orb-wrap" id="orbWrapThree"><div class="bg-orb three"></div></div>
 
 <div class="container">
 
@@ -708,7 +792,7 @@ font-size:13px;
 
 <div>
 
-<h1>Lakshya Maheshwari</h1>
+<h1 id="nameReveal">Lakshya Maheshwari</h1>
 
 <div class="tagline">BBA (Foreign Trade) Student | Aspiring Finance &amp; Strategy Consulting Professional</div>
 
@@ -756,7 +840,7 @@ Web: <a href="https://lakshyamaheshwari22.github.io" target="_blank" rel="noopen
 
 <p>
 
-Hi, I'm <b>Lakshya Maheshwari</b>, a second-year BBA (Foreign Trade) student at the <b>School of Commerce, Devi Ahilya Vishwavidyalaya (SOC-DAVV)</b>, with a strong interest in business strategy, finance, and market research.
+Hi, I'm Lakshya Maheshwari, a second-year BBA (Foreign Trade) student at the School of Commerce, Devi Ahilya Vishwavidyalaya (SOC-DAVV), with a strong interest in business strategy, finance, and market research.
 
 </p>
 
@@ -944,7 +1028,21 @@ Investor pitch deck for an AI voice assistant designed for India's private bus o
 
 <script>
 
+// Letter-by-letter name reveal
+const nameEl = document.getElementById('nameReveal');
+const nameText = nameEl.textContent;
+nameEl.innerHTML = '';
+[...nameText].forEach((ch, i) => {
+
+const span = document.createElement('span');
+span.textContent = ch === ' ' ? '\u00A0' : ch;
+span.style.animationDelay = (i * 0.045) + 's';
+nameEl.appendChild(span);
+
+});
+
 const revealTargets = document.querySelectorAll('.section-title, .card, .exp-item');
+const timelineEl = document.querySelector('.exp-timeline');
 
 const observer = new IntersectionObserver((entries) => {
 
@@ -953,7 +1051,10 @@ entries.forEach(entry => {
 if(entry.isIntersecting){
 
 entry.target.classList.add('in-view');
-observer.unobserve(entry.target);
+
+} else {
+
+entry.target.classList.remove('in-view');
 
 }
 
@@ -962,6 +1063,26 @@ observer.unobserve(entry.target);
 }, { threshold: 0.15 });
 
 revealTargets.forEach(el => observer.observe(el));
+
+if(timelineEl){
+
+const timelineObserver = new IntersectionObserver((entries) => {
+
+entries.forEach(entry => {
+
+if(entry.isIntersecting){
+
+timelineEl.classList.add('in-view');
+
+}
+
+});
+
+}, { threshold: 0.1 });
+
+timelineObserver.observe(timelineEl);
+
+}
 
 const progressBar = document.getElementById('scrollProgress');
 
@@ -976,6 +1097,79 @@ progressBar.style.width = pct + '%';
 
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+if(!prefersReducedMotion && hasFinePointer){
+
+const spotlight = document.getElementById('spotlight');
+const cursorGlow = document.getElementById('cursorGlow');
+
+window.addEventListener('mousemove', (e) => {
+
+spotlight.style.opacity = '1';
+spotlight.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
+
+cursorGlow.style.opacity = '1';
+cursorGlow.style.left = e.clientX + 'px';
+cursorGlow.style.top = e.clientY + 'px';
+
+});
+
+window.addEventListener('mouseleave', () => {
+
+spotlight.style.opacity = '0';
+cursorGlow.style.opacity = '0';
+
+});
+
+document.querySelectorAll('.card').forEach(card => {
+
+card.addEventListener('mousemove', (e) => {
+
+const rect = card.getBoundingClientRect();
+const x = e.clientX - rect.left;
+const y = e.clientY - rect.top;
+const centerX = rect.width / 2;
+const centerY = rect.height / 2;
+const rotateX = ((y - centerY) / centerY) * -6;
+const rotateY = ((x - centerX) / centerX) * 6;
+
+card.style.transform = `translateY(-6px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+});
+
+card.addEventListener('mouseleave', () => {
+
+card.style.transform = '';
+
+});
+
+});
+
+// Magnetic effect for social icons
+document.querySelectorAll('.socials a').forEach(icon => {
+
+icon.addEventListener('mousemove', (e) => {
+
+const rect = icon.getBoundingClientRect();
+const x = e.clientX - rect.left - rect.width / 2;
+const y = e.clientY - rect.top - rect.height / 2;
+
+icon.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px) scale(1.08)`;
+
+});
+
+icon.addEventListener('mouseleave', () => {
+
+icon.style.transform = '';
+
+});
+
+});
+
+}
 
 </script>
 
