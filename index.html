@@ -31,13 +31,13 @@ overflow-x:hidden;
 position:fixed;
 top:0;
 left:0;
-width:600px;
-height:600px;
+width:320px;
+height:320px;
 border-radius:50%;
-background:radial-gradient(circle,rgba(37,99,235,.16) 0%,rgba(37,99,235,0) 70%);
+background:radial-gradient(circle,rgba(37,99,235,.08) 0%,rgba(37,99,235,0) 70%);
 pointer-events:none;
 z-index:2;
-transform:translate(-300px,-300px);
+transform:translate(-160px,-160px);
 transition:opacity .3s ease;
 opacity:0;
 
@@ -46,10 +46,10 @@ opacity:0;
 .cursor-glow{
 
 position:fixed;
-width:500px;
-height:500px;
+width:260px;
+height:260px;
 border-radius:50%;
-background:radial-gradient(circle,rgba(124,58,237,.14) 0%,rgba(124,58,237,0) 70%);
+background:radial-gradient(circle,rgba(124,58,237,.07) 0%,rgba(124,58,237,0) 70%);
 pointer-events:none;
 z-index:1;
 transform:translate(-50%,-50%);
@@ -181,13 +181,6 @@ animation:fadeUp .6s ease both;
 
 }
 
-@keyframes letterUp{
-
-from{opacity:0;transform:translateY(30px) rotateX(45deg);}
-to{opacity:1;transform:translateY(0) rotateX(0);}
-
-}
-
 .header h1{
 
 font-size:42px;
@@ -198,15 +191,6 @@ background-size:200% auto;
 background-clip:text;
 color:transparent;
 animation:shimmer 6s linear infinite;
-perspective:600px;
-
-}
-
-.header h1 span{
-
-display:inline-block;
-opacity:0;
-animation:letterUp .6s cubic-bezier(.2,.9,.3,1) forwards;
 
 }
 
@@ -757,7 +741,7 @@ font-size:13px;
 @media (prefers-reduced-motion: reduce){
 
 *{animation:none !important;transition:none !important;}
-.section-title,.card,.exp-item,.tag,.header h1 span{opacity:1 !important;transform:none !important;}
+.section-title,.card,.exp-item,.tag{opacity:1 !important;transform:none !important;}
 .section-title::after{width:60px !important;}
 .bg-orb{display:none;}
 .header h1{-webkit-background-clip:initial;background-clip:initial;color:#fff;}
@@ -792,7 +776,7 @@ font-size:13px;
 
 <div>
 
-<h1 id="nameReveal">Lakshya Maheshwari</h1>
+<h1>Lakshya Maheshwari</h1>
 
 <div class="tagline">BBA (Foreign Trade) Student | Aspiring Finance &amp; Strategy Consulting Professional</div>
 
@@ -1000,7 +984,7 @@ Investor pitch deck for an AI voice assistant designed for India's private bus o
 
 <div class="badges">
 
-<a class="badge" href="Mckinsey%20Forward%20Certificate.pdf" target="_blank" rel="noopener">McKinsey Forward Program Certificate</a>
+<a class="badge" href="Mckinsey%20Forward%20Certificate.pdf" target="_blank" rel="noopener">McKinsey Forward Program</a>
 
 </div>
 
@@ -1027,19 +1011,6 @@ Investor pitch deck for an AI voice assistant designed for India's private bus o
 </div>
 
 <script>
-
-// Letter-by-letter name reveal
-const nameEl = document.getElementById('nameReveal');
-const nameText = nameEl.textContent;
-nameEl.innerHTML = '';
-[...nameText].forEach((ch, i) => {
-
-const span = document.createElement('span');
-span.textContent = ch === ' ' ? '\u00A0' : ch;
-span.style.animationDelay = (i * 0.045) + 's';
-nameEl.appendChild(span);
-
-});
 
 const revealTargets = document.querySelectorAll('.section-title, .card, .exp-item');
 const timelineEl = document.querySelector('.exp-timeline');
@@ -1109,7 +1080,7 @@ const cursorGlow = document.getElementById('cursorGlow');
 window.addEventListener('mousemove', (e) => {
 
 spotlight.style.opacity = '1';
-spotlight.style.transform = `translate(${e.clientX - 300}px, ${e.clientY - 300}px)`;
+spotlight.style.transform = `translate(${e.clientX - 160}px, ${e.clientY - 160}px)`;
 
 cursorGlow.style.opacity = '1';
 cursorGlow.style.left = e.clientX + 'px';
