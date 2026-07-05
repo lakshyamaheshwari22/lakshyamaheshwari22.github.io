@@ -81,6 +81,60 @@ transition:width .1s ease-out;
 
 }
 
+.section-indicator{
+
+position:fixed;
+bottom:24px;
+left:24px;
+z-index:10;
+font-size:12px;
+letter-spacing:.05em;
+color:#6b7280;
+display:flex;
+align-items:center;
+gap:8px;
+pointer-events:none;
+opacity:0;
+transition:opacity .4s ease;
+
+}
+
+.section-indicator.visible{
+
+opacity:1;
+
+}
+
+.section-indicator .current{
+
+color:#e5e7eb;
+font-weight:600;
+
+}
+
+.section-indicator .track{
+
+position:relative;
+width:28px;
+height:1px;
+background:#374151;
+overflow:hidden;
+
+}
+
+.section-indicator .track::before{
+
+content:"";
+position:absolute;
+left:0;
+top:0;
+height:100%;
+width:var(--sec-progress,0%);
+background:#60a5fa;
+transition:width .3s ease;
+
+}
+
 .container{
 
 width:min(1000px,92%);
@@ -276,6 +330,15 @@ width:60px;
 border:none;
 border-top:2px dashed #374151;
 margin:14px 0 36px;
+transform-origin:left center;
+transform:scaleX(0);
+transition:transform .8s cubic-bezier(.22,1,.36,1) .1s;
+
+}
+
+.divider.in-view{
+
+transform:scaleX(1);
 
 }
 
@@ -689,13 +752,30 @@ font-size:13px;
 .exp-item{flex-direction:column;}
 .exp-left{width:100%;}
 .header .tagline{font-size:13px;}
+.section-indicator{display:none;}
+
+}
+
+a:focus-visible,
+.tag:focus-visible{
+
+outline:2px solid #60a5fa;
+outline-offset:3px;
+border-radius:4px;
+
+}
+
+.card:focus-visible{
+
+outline:2px solid #2563eb;
+outline-offset:2px;
 
 }
 
 @media (prefers-reduced-motion: reduce){
 
 *{animation:none !important;transition:none !important;}
-.section-title,.card,.exp-item,.tag,.about-text p{opacity:1 !important;transform:none !important;filter:none !important;}
+.section-title,.card,.exp-item,.tag,.about-text p,.divider{opacity:1 !important;transform:none !important;filter:none !important;}
 .section-title::after{width:60px !important;}
 .header h1{-webkit-background-clip:initial;background-clip:initial;color:#fff;}
 .exp-item::before{animation:none;}
@@ -719,9 +799,17 @@ font-size:13px;
 
 <div class="scroll-progress" id="scrollProgress"></div>
 
+<div class="section-indicator" id="sectionIndicator">
+
+<span class="current" id="secCurrent">01</span> / <span id="secTotal">05</span>
+
+<span class="track"></span>
+
+</div>
+
 <div class="container">
 
-<div class="header">
+<div class="header" id="sec-header">
 
 <div>
 
@@ -761,7 +849,7 @@ Web: <a href="https://lakshyamaheshwari22.github.io" target="_blank" rel="noopen
 
 </div>
 
-<h2 class="section-title">About Me</h2>
+<h2 class="section-title" id="sec-about">About Me</h2>
 
 <hr class="divider">
 
@@ -805,7 +893,7 @@ Through internships, consulting simulations, and independent projects, I've buil
 
 </div>
 
-<h2 class="section-title">Experience</h2>
+<h2 class="section-title" id="sec-experience">Experience</h2>
 
 <hr class="divider">
 
@@ -877,7 +965,7 @@ Worked on geopolitical case studies, developing research and analytical skills a
 
 </div>
 
-<h2 class="section-title">Featured Projects</h2>
+<h2 class="section-title" id="sec-projects">Featured Projects</h2>
 
 <hr class="divider">
 
@@ -947,7 +1035,7 @@ Investor pitch deck for an AI voice assistant designed for India's private bus o
 
 <script>
 
-const revealTargets = document.querySelectorAll('.section-title, .card, .exp-item, .about-text p');
+const revealTargets = document.querySelectorAll('.section-title, .card, .exp-item, .about-text p, .divider');
 
 document.querySelectorAll('.grid .card').forEach((card, i) => {
 
@@ -1009,6 +1097,14 @@ timelineObserver.observe(timelineEl);
 }
 
 const progressBar = document.getElementById('scrollProgress');
+const sectionMarkers = ['sec-header','sec-about','sec-experience','sec-projects','contact']
+.map(id => document.getElementById(id))
+.filter(Boolean);
+const secCurrentEl = document.getElementById('secCurrent');
+const secTotalEl = document.getElementById('secTotal');
+const sectionIndicatorEl = document.getElementById('sectionIndicator');
+
+if(secTotalEl){ secTotalEl.textContent = String(sectionMarkers.length).padStart(2,'0'); }
 
 function onScroll(){
 
@@ -1016,6 +1112,37 @@ const scrollTop = window.scrollY;
 const docHeight = document.documentElement.scrollHeight - window.innerHeight;
 const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 progressBar.style.width = pct + '%';
+
+if(sectionMarkers.length){
+
+let activeIndex = 0;
+
+sectionMarkers.forEach((el, i) => {
+
+const top = el.getBoundingClientRect().top;
+
+if(top <= window.innerHeight * 0.5){
+
+activeIndex = i;
+
+}
+
+});
+
+if(secCurrentEl){
+
+secCurrentEl.textContent = String(activeIndex + 1).padStart(2,'0');
+
+}
+
+if(sectionIndicatorEl){
+
+sectionIndicatorEl.classList.toggle('visible', scrollTop > 80);
+sectionIndicatorEl.style.setProperty('--sec-progress', pct + '%');
+
+}
+
+}
 
 }
 
