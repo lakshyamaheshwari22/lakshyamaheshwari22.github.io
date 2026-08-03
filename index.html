@@ -17,6 +17,13 @@ font-family:Inter,sans-serif;
 scroll-behavior:smooth;
 }
 
+html,body{
+
+max-width:100%;
+overflow-x:hidden;
+
+}
+
 @keyframes pageFadeIn{
 
 from{opacity:0;}
@@ -229,6 +236,8 @@ fill:#e5e7eb;
 font-size:14px;
 color:#9ca3af;
 line-height:1.8;
+overflow-wrap:anywhere;
+word-break:break-word;
 
 }
 
@@ -559,6 +568,14 @@ margin-top:4px;
 
 }
 
+.exp-left .duration{
+
+font-size:12px;
+color:#6b7280;
+margin-top:2px;
+
+}
+
 .exp-right{
 
 flex:1;
@@ -818,7 +835,7 @@ outline-offset:2px;
 
 <h1>Lakshya Maheshwari</h1>
 
-<div class="tagline">Business Strategy Intern @ Konsyte | Market Research &amp; Strategy Intern @ Axeron Services | McKinsey Forward '26</div>
+<div class="tagline">Market Research &amp; Strategy Intern @ Axeron Services | Ex-Business Strategy Intern @ Konsyte | McKinsey Forward '26</div>
 
 </div>
 
@@ -884,10 +901,6 @@ Through internships, consulting simulations, and independent projects, I've buil
 
 <span class="tag">Financial Modelling</span>
 
-<span class="tag">Competitive Analysis</span>
-
-<span class="tag">Growth Strategy</span>
-
 <span class="tag">Equity Research</span>
 
 </div>
@@ -906,31 +919,13 @@ Through internships, consulting simulations, and independent projects, I've buil
 
 <div class="exp-left">
 
-<h3>Konsyte Private Limited</h3>
-
-<div class="role">Business Strategy Intern</div>
-
-<div class="dates">July 2026 – Present</div>
-
-</div>
-
-<div class="exp-right">
-
-Konsyte is a global management consulting firm helping SMEs and growth-stage businesses across the UK, Europe, UAE, India and the US, combining strategy, systems, operations and growth support to help organizations scale with clarity.
-
-</div>
-
-</div>
-
-<div class="exp-item">
-
-<div class="exp-left">
-
 <h3>Axeron Services LLP</h3>
 
 <div class="role">Market Research &amp; Strategy Intern</div>
 
-<div class="dates">June 2026 – Present</div>
+<div class="dates">Jun 2026 – Present</div>
+
+<div class="duration" id="axeronDuration" data-start="2026-06-08">3 mos</div>
 
 </div>
 
@@ -946,11 +941,37 @@ Conducted pre-market research on US-listed equities by analyzing earnings, news 
 
 <div class="exp-left">
 
+<h3>Konsyte Private Limited</h3>
+
+<div class="role">Business Strategy Intern</div>
+
+<div class="dates">Jul 2026 – Aug 2026</div>
+
+<div class="duration">2 mos</div>
+
+</div>
+
+<div class="exp-right">
+
+Konsyte is a global management consulting firm helping SMEs and growth-stage businesses across the UK, Europe, UAE, India and the US, combining strategy, systems, operations and growth support to help organizations scale with clarity.<br><br>
+
+Conducted desk research, benchmarking, and landscape analysis on industries, competitors, and market trends, and synthesized findings into structured briefs and presentations. Built a targeted prospect list of UK-based companies for outreach, and supported a client case study through market research and content structuring.
+
+</div>
+
+</div>
+
+<div class="exp-item">
+
+<div class="exp-left">
+
 <h3>International Institute of SDG's and Public Policy Research</h3>
 
 <div class="role">Research Intern</div>
 
-<div class="dates">March 2026 – April 2026</div>
+<div class="dates">Mar 2026 – Apr 2026</div>
+
+<div class="duration">2 mos</div>
 
 </div>
 
@@ -1056,6 +1077,42 @@ setTimeout(() => { preloader.classList.add('hide'); }, 2500);
 }
 
 }
+
+// Auto-calculate duration for ongoing roles
+document.querySelectorAll('.duration[data-start]').forEach(el => {
+
+const start = new Date(el.dataset.start);
+const now = new Date();
+let months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+
+if(now.getDate() < start.getDate()){
+
+months -= 1;
+
+}
+
+months = Math.max(months, 0) + 1;
+
+const years = Math.floor(months / 12);
+const remMonths = months % 12;
+
+let text = '';
+
+if(years > 0){
+
+text += years + (years === 1 ? ' yr ' : ' yrs ');
+
+}
+
+if(remMonths > 0 || years === 0){
+
+text += remMonths + (remMonths === 1 ? ' mo' : ' mos');
+
+}
+
+el.textContent = text.trim();
+
+});
 
 const revealTargets = document.querySelectorAll('.section-title, .card, .exp-item, .about-text p, .divider');
 
